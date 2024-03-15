@@ -3,9 +3,9 @@ use skyline::libc::memcpy;
 use crate::navigation::{self, CurrentNavigation};
 use crate::playaid;
 
-static KEYBOARD_OFFSET: usize = 0x39c5380;
+static KEYBOARD_OFFSET: usize = 0x39c6000;
 
-#[skyline::hook(offset = KEYBOARD_OFFSET)] 
+#[skyline::hook(offset = KEYBOARD_OFFSET)]
 pub unsafe fn show_keyboard(string: *mut *mut u16, _show_keyboard_arg: *const u64) -> u32 {
     let return_code = 0;
     let new_string_vec: Vec<u16> = playaid::TEST_ID[playaid::ID_INDEX].encode_utf16().chain(core::iter::once(0)).collect();

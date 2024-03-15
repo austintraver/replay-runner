@@ -33,7 +33,7 @@ pub enum CurrentNavigation {
 pub static mut NAV: CurrentNavigation = CurrentNavigation::MainWaitingForLoad; //CurrentNavigation::MainWaitingForLoad; //CurrentNavigation::Debug;
 
 // Hook MBST get label to understand where we are in menu navigation currently
-#[skyline::hook(offset = 0x3778af0)]
+#[skyline::hook(offset = 0x3779770)]
 unsafe fn mbst_get_label(layout_view: *mut u64, label_string: *mut u8) {
     let label_rust_str = CStr::from_ptr(label_string).to_str().unwrap();
     if label_rust_str == "mnu_top_help_melee" && NAV == CurrentNavigation::MainWaitingForLoad {
